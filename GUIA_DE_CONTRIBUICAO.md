@@ -111,11 +111,26 @@ fix: corrige sobreposição de horários no agendamento
 docs: atualiza README com instruções de instalação
 ```
 
+**Escopo (opcional):** entre o prefixo e os dois-pontos, você pode indicar em parênteses **qual parte do sistema** o commit afeta — `tipo(escopo): descrição`. Isso ajuda bastante quando o projeto já tem módulos bem definidos (ex.: `agenda`, `auth`, `api`, `ui`):
+
+```
+feat(agenda): adiciona cálculo automático de horário de término da consulta
+fix(auth): corrige expiração prematura do token de login
+chore(deps): atualiza versão do Spring Boot
+test(agenda): adiciona testes para conflito de horários
+refactor(api): extrai validação de entrada para um middleware
+docs(readme): documenta variáveis de ambiente necessárias
+```
+
+O escopo pode ser praticamente qualquer módulo/área do seu projeto — não existe uma lista fechada. Use o mesmo nome que vocês já usam para o módulo no board/EAP (ex.: `agenda`, `auth`, `api`, `ui`, `deps`, `readme`), assim o histórico do Git e o board falam a mesma língua.
+
+Não é obrigatório usar escopo — em commits pequenos ou projetos sem módulos claros, o padrão simples (`feat:`) continua válido. Mas em projetos maiores, principalmente os organizados por EAP (veja "Nomeando branches e issues com código EAP", logo abaixo), o escopo deixa o histórico bem mais fácil de filtrar.
+
 ### Fluxo de Branches
 
 A organização adota um fluxo simples de duas camadas:
 
-- **`main`** — reflete sempre o estado estável e "publicável" do projeto. Protegida por **GitHub Rulesets** (Seção 6): ninguém commita direto nela, só chega código ali via Pull Request aprovado.
+- **`main`** — reflete sempre o estado estável e "publicável" do projeto. Protegida por **GitHub Rulesets** (veja "Protegendo suas Branches", mais abaixo nesta mesma seção): ninguém commita direto nela, só chega código ali via Pull Request aprovado.
 - **`develop`** — branch de integração contínua, onde as features são reunidas antes de seguir para a `main`. É a base para novas branches de trabalho.
 
 **Branches de trabalho** nascem a partir da `develop`, com prefixo indicando o tipo de mudança:
@@ -133,6 +148,33 @@ refactor/nome-da-mudanca
 4. Após revisão e aprovação, a `develop` é periodicamente promovida para `main` (release).
 
 > Por que proteger a `main` em vez de deixar todo mundo commitar direto nela? Porque a `main` é a "vitrine" do projeto — o que um professor avalia ou um recrutador vê primeiro. Manter a `develop` como buffer de integração evita que código quebrado ou incompleto chegue lá.
+
+### Nomeando Branches e Issues com Código EAP (opcional)
+
+Se o seu projeto usa uma **EAP (Estrutura Analítica de Projeto)** para quebrar o trabalho em módulos e tarefas numeradas, vale a pena carregar esse código no nome da branch e no título da issue — assim dá pra rastrear na hora qual item do planejamento aquele trabalho resolve, sem precisar abrir o board.
+
+**Branches:** mantenha o prefixo de tipo (Seção 4) e insira o código EAP logo depois, separado por hífen:
+
+```
+feature/4.3.1-interface-agenda
+fix/2.1-bug-login
+refactor/3.2-reestrutura-api-usuarios
+```
+
+Formato: `tipo/CODIGO_EAP-descricao-curta`, com hífens no lugar de espaços, tudo em minúsculo e sem acentos — igual à convenção de nome de branch já usada no restante da seção.
+
+**Issues:** prefixe o título com o código entre colchetes, seguido da descrição:
+
+```
+[4.3.1] Interface da agenda
+[2.1] Login não expira o token corretamente
+```
+
+Isso deixa o título ordenável e fácil de cruzar visualmente com a EAP do projeto, sem depender de nenhuma label ou campo extra no board.
+
+> 💡 Essa numeração combina bem com o escopo do commit (item acima): se a tarefa `4.3.1` é sobre o módulo `agenda`, o commit natural que fecha essa branch é algo como `feat(agenda): adiciona interface da agenda`, e o Pull Request pode referenciar `Closes #<issue-da-4.3.1>`. Três pontos diferentes (branch, commit, issue) contando a mesma história.
+
+Essa convenção é **opcional**: só faz sentido para projetos que efetivamente montaram uma EAP. Projetos menores, sem WBS formal, seguem normalmente com `feature/nome-da-funcionalidade` como já descrito acima.
 
 ### Protegendo suas Branches — Importando o Ruleset Recomendado
 
@@ -159,7 +201,57 @@ Esse passo é rápido (menos de um minuto) e vale a pena fazer logo depois de cr
 
 ---
 
-## 5. Ecossistema de Repositórios
+## 5. Labels — Como e Quando Usar
+
+Todo repositório da organização já nasce com um conjunto padrão de labels configuradas a nível organizacional — você **não precisa criar nenhuma label manualmente**. Usar as labels certas na Issue ou Pull Request certo não é burocracia: é um sinal de boa prática de organização que ajuda colegas, professores e você mesmo a entender rapidamente o estado do projeto.
+
+### Nativas do GitHub
+
+Vêm prontas em qualquer repositório, sem configuração:
+
+| Label | Quando usar |
+|---|---|
+| `bug` | Algo não está funcionando como deveria |
+| `documentation` | Mudanças relacionadas apenas a documentação |
+| `enhancement` | Sugestão de nova funcionalidade ou melhoria |
+| `question` | Dúvida que não é bug nem sugestão |
+| `good first issue` | Boa entrada para quem está contribuindo pela primeira vez |
+| `help wanted` | O time do projeto sinaliza que precisa de ajuda externa |
+| `duplicate` | Esta Issue/PR já existe em outro lugar |
+| `invalid` | Isso não parece correto/aplicável |
+| `wontfix` | Reconhecido, mas não será trabalhado |
+
+> ⚠️ Não crie `bugfix`, `help-wanted` (com hífen) ou qualquer variação/tradução das labels acima. A label nativa já cobre o caso, e o PR que resolve um `bug` se conecta a ele via `Fixes #123` e o commit `fix:` (Seção 4) — criar uma label extra só duplicaria essa informação.
+
+### Customizadas da SenacOS
+
+Também já vêm prontas em todo repositório novo. Use para indicar **tipo** e **área** do trabalho:
+
+| Label | Quando usar |
+|---|---|
+| `task` | Sub-issue de trabalho técnico |
+| `epic` | Issue-pai/Módulo, agrupando várias tarefas |
+| `frontend` | Interface, componentes visuais, UX |
+| `backend` | API, regras de negócio, lógica de servidor |
+| `banco-de-dados` | Schema, migrations, queries |
+| `infra` | CI/CD, deploy, configuração de ambiente |
+| `design` | Protótipos, identidade visual, UI Kit |
+| `security` | Proteção de dados, autenticação, correção de vulnerabilidades |
+| `functional` | Requisito funcional — recurso ou capacidade direta do sistema |
+| `non-functional` | Requisito não-funcional — segurança, performance, escalabilidade |
+| `mvp` | Funcionalidade essencial para a entrega mínima viável |
+| `refinement` | Item ainda precisa de detalhamento antes de entrar no board |
+| `blocked` | Não pode avançar por dependência externa ou outra tarefa pendente |
+
+### O que **não** é label
+
+Prioridade, tamanho/esforço e sprint **não** são labels — use os campos nativos do GitHub Projects (`Priority`, `Size`, `Iteration`) no board da sua equipe. O mesmo vale para status (Todo/In Progress/Done): isso é coluna do Kanban, não label. Duas fontes rastreando a mesma informação tendem a dessincronizar — alguém move o card e esquece de trocar a label, por exemplo.
+
+**Regra prática:** se a informação muda com frequência ao longo do trabalho (status, prioridade, sprint), ela vive no board. Se é uma característica que praticamente não muda depois de definida (é bug ou é feature, é frontend ou é backend), ela vive na label.
+
+---
+
+## 6. Ecossistema de Repositórios
 
 | Repositório | Propósito | Status |
 |---|---|---|
@@ -175,7 +267,7 @@ Esse passo é rápido (menos de um minuto) e vale a pena fazer logo depois de cr
 
 ---
 
-## 6. Metodologia & Integridade do Ecossistema
+## 7. Metodologia & Integridade do Ecossistema
 
 - **Gestão Ágil Integrada:** templates padronizados conectados ao **GitHub Projects** (Kanban) para organizar entregas acadêmicas.
 - **Governança Automatizada:** branches principais protegidas por **GitHub Rulesets**, garantindo revisão mínima antes de qualquer código chegar à vitrine pública.
