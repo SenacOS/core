@@ -12,7 +12,7 @@ No GitHub existem dois níveis de relação com a nossa comunidade — entenda a
 |---|---|---|
 | **Como participa** | Abre uma Issue, entra numa Discussion, ou envia um Pull Request em qualquer repositório público | Convite oficial para o quadro `People` |
 | **Pré-requisito** | Nenhum — qualquer aluno (ou visitante externo) pode contribuir | Ter uma contribuição real reconhecida pela comunidade |
-| **Onde aparece** | Card "Contributors" do repositório específico onde contribuiu | 🏅 Logo do SenacOS no perfil pessoal do GitHub |
+| **Onde aparece** | Card "Contributors" do repositório específico onde contribuiu | 🏅 Logo da SenacOS no perfil pessoal do GitHub |
 | **Acesso interno** | Nenhum — participação pública padrão | Visibilidade/interação em espaços internos da organização |
 
 Sua primeira contribuição não precisa ser um Pull Request de código. Corrigir um erro de digitação na Biblioteca Livre, responder uma dúvida numa Discussion, ou sugerir uma melhoria de documentação também conta. O que importa é contribuir de verdade — não o quão avançado você já é.
@@ -23,7 +23,7 @@ Sua primeira contribuição não precisa ser um Pull Request de código. Corrigi
 
 ## 2. Organização e Times (GitHub Teams)
 
-O SenacOS usa **GitHub Teams** — no formato "flat" (sem hierarquia entre times) — para identificar grupos dentro da comunidade, de forma parecida com "roles" em servidores de comunidade. Isso não concede privilégios administrativos: é só uma forma de facilitar comunicação e notificação.
+A SenacOS usa **GitHub Teams** — no formato "flat" (sem hierarquia entre times) — para identificar grupos dentro da comunidade, de forma parecida com "roles" em servidores de comunidade. Isso não concede privilégios administrativos: é só uma forma de facilitar comunicação e notificação.
 
 **Times previstos:**
 
@@ -46,7 +46,7 @@ Em qualquer Issue, Discussion ou Pull Request, mencione o time com `@SenacOS/nom
 
 **Descoberta para quem está fora da organização:**
 
-Embora os times internos usem siglas, os repositórios acadêmicos recebem **Topics/Tags com o nome do curso por extenso** (ex.: `ciencia-da-computacao`, `analise-e-desenvolvimento-de-sistemas`) — assim, recrutadores e visitantes externos que não conhecem as abreviações do SenacOS ainda conseguem filtrar e encontrar projetos pelo nome completo do curso.
+Embora os times internos usem siglas, os repositórios acadêmicos recebem **Topics/Tags com o nome do curso por extenso** (ex.: `ciencia-da-computacao`, `analise-e-desenvolvimento-de-sistemas`) — assim, recrutadores e visitantes externos que não conhecem as abreviações da SenacOS ainda conseguem filtrar e encontrar projetos pelo nome completo do curso.
 
 > 🚧 **Planejado:** um formulário de onboarding para novos membros, com checkbox de seleção do curso (por extenso), que os direciona automaticamente ao time correspondente na aceitação do convite.
 
@@ -133,6 +133,29 @@ refactor/nome-da-mudanca
 4. Após revisão e aprovação, a `develop` é periodicamente promovida para `main` (release).
 
 > Por que proteger a `main` em vez de deixar todo mundo commitar direto nela? Porque a `main` é a "vitrine" do projeto — o que um professor avalia ou um recrutador vê primeiro. Manter a `develop` como buffer de integração evita que código quebrado ou incompleto chegue lá.
+
+### Protegendo suas Branches — Importando o Ruleset Recomendado
+
+A SenacOS opera no plano gratuito do GitHub, então Rulesets a nível de organização não estão disponíveis (esse recurso é exclusivo dos planos pagos Team/Enterprise). Isso significa que **cada repositório precisa da sua própria proteção configurada individualmente** — inclusive o seu.
+
+Para isso não depender de você configurar tudo manualmente campo por campo, o `Template-Projeto-Academico` disponibiliza um arquivo pronto para importação: `ruleset-recipe.json`.
+
+**Como aplicar no seu repositório:**
+
+1. No seu repositório, vá em `Settings → Rules → Rulesets`.
+2. Clique em `New ruleset → Import a ruleset`.
+3. Selecione o arquivo `ruleset-recipe.json` (baixado do `Template-Projeto-Academico`).
+4. Revise as regras importadas e clique em `Create`.
+
+**O que essa configuração garante nas branches `main` e `develop`:**
+- Bloqueio de exclusão das branches.
+- Bloqueio de force-push (ninguém reescreve o histórico por cima do trabalho do colega).
+- Exigência de Pull Request para qualquer mudança chegar lá — nada de push direto, nem para quem administra o repositório.
+- Exigência de pelo menos 1 aprovação de revisão antes do merge.
+
+> ⚠️ **Nota técnica:** a lista de exceções de bypass (quem pode ignorar as regras) não é incluída no arquivo exportado/importado, por padrão do próprio GitHub. Se quiser abrir uma exceção pontual (por exemplo, para você mesmo como administrador do repositório em algum caso excepcional), configure isso manualmente depois de importar, na própria tela do Ruleset.
+
+Esse passo é rápido (menos de um minuto) e vale a pena fazer logo depois de criar seu repositório a partir do template — antes do primeiro Pull Request.
 
 ---
 
