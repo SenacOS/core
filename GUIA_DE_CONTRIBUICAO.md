@@ -1,6 +1,6 @@
 # 📖 Guia de Contribuição e Navegação — SenacOS
 
-Este documento é a "Constituição" da organização: como participar, como ganhar seu broche de membro, como se organizar em times, como nomear e versionar seu projeto acadêmico, e onde encontrar cada frente da comunidade.
+Este documento é a "Constituição" da organização: como participar, como ganhar seu broche de membro, como se organizar em times, como nomear e versionar seu projeto acadêmico, como usar o board ágil, e onde encontrar cada frente da comunidade.
 
 ---
 
@@ -52,7 +52,7 @@ Embora os times internos usem siglas, os repositórios acadêmicos recebem **Top
 
 ---
 
-## 3. Convenção de Nomenclatura para Projetos Acadêmicos
+## 3. Nomenclatura de Repositórios e Projetos Acadêmicos (Convenção de Nomes)
 
 Cada projeto acadêmico deve viver em **seu próprio repositório individual** dentro da organização — nunca como uma pasta dentro de um repositório compartilhado. Isso evita conflitos de merge entre grupos diferentes e mantém as abas de Issues/Pull Requests/Projects utilizáveis pelos professores para avaliação individual de cada equipe.
 
@@ -82,15 +82,15 @@ Além do prefixo no nome, adicione **Topics** ao repositório no GitHub:
 
 Isso permite filtrar a lista de repositórios da organização por tag, algo que a ordenação alfabética sozinha não resolve.
 
-> 💡 **Repository Template:** para reduzir o atrito de quem está criando seu primeiro repositório, use o [`Template-Projeto-Academico`](https://github.com/SenacOS/Template-Projeto-Academico) como ponto de partida — ele já vem com `.gitignore`, licença MIT e `README.md` estruturado prontos. Clique em "Use this template", dê o nome já no formato acima, e o projeto nasce pronto.
+> 💡 **Repository Template:** para reduzir o atrito de quem está criando seu primeiro repositório, use o [`Template-Projeto-Academico`](https://github.com/SenacOS/Template-Projeto-Academico) como ponto de partida — ele já vem com `.gitignore`, licença MIT, `README.md` estruturado e Issue Templates de Módulo/Tarefa prontos. Clique em "Use this template", dê o nome já no formato acima, e o projeto nasce pronto.
 
 **Autonomia de criação:** membros têm liberdade total para criar repositórios de projetos acadêmicos a qualquer momento, sem necessidade de aprovação prévia de um moderador — dado o peso avaliativo desses projetos, exigir espera por autorização seria contraproducente para o cronograma acadêmico dos alunos.
 
 ---
 
-## 4. Padrões de Desenvolvimento e Git Flow
+## 4. Padrões de Desenvolvimento e Git Flow (Commits, Branches e Rulesets)
 
-### Commits Semânticos
+### Commits Semânticos (Conventional Commits)
 
 Todo commit deve seguir o padrão **Conventional Commits**, no formato `tipo: descrição breve`. Isso deixa o histórico do projeto legível e facilita a geração automática de changelogs no futuro.
 
@@ -126,7 +126,7 @@ O escopo pode ser praticamente qualquer módulo/área do seu projeto — não ex
 
 Não é obrigatório usar escopo — em commits pequenos ou projetos sem módulos claros, o padrão simples (`feat:`) continua válido. Mas em projetos maiores, principalmente os organizados por EAP (veja "Nomeando branches e issues com código EAP", logo abaixo), o escopo deixa o histórico bem mais fácil de filtrar.
 
-### Fluxo de Branches
+### Fluxo de Branches (main, develop, feature/fix/refactor)
 
 A organização adota um fluxo simples de duas camadas:
 
@@ -201,7 +201,7 @@ Esse passo é rápido (menos de um minuto) e vale a pena fazer logo depois de cr
 
 ---
 
-## 5. Labels — Como e Quando Usar
+## 5. Labels — Como e Quando Usar (Nativas, Customizadas e o que Não é Label)
 
 Todo repositório da organização já nasce com um conjunto padrão de labels configuradas a nível organizacional — você **não precisa criar nenhuma label manualmente**. Usar as labels certas na Issue ou Pull Request certo não é burocracia: é um sinal de boa prática de organização que ajuda colegas, professores e você mesmo a entender rapidamente o estado do projeto.
 
@@ -245,16 +245,97 @@ Também já vêm prontas em todo repositório novo. Use para indicar **tipo** e 
 
 ### O que **não** é label
 
-Prioridade, tamanho/esforço e sprint **não** são labels — use os campos nativos do GitHub Projects (`Priority`, `Size`, `Iteration`) no board da sua equipe. O mesmo vale para status (Todo/In Progress/Done): isso é coluna do Kanban, não label. Duas fontes rastreando a mesma informação tendem a dessincronizar — alguém move o card e esquece de trocar a label, por exemplo.
+Prioridade, tamanho/esforço e sprint **não** são labels — use os campos nativos do GitHub Projects (`Priority`, `Size`, `Iteration`) no board da sua equipe, detalhados na Seção 6. O mesmo vale para status (Todo/In Progress/Done): isso é coluna do Kanban, não label. Duas fontes rastreando a mesma informação tendem a dessincronizar — alguém move o card e esquece de trocar a label, por exemplo.
 
 **Regra prática:** se a informação muda com frequência ao longo do trabalho (status, prioridade, sprint), ela vive no board. Se é uma característica que praticamente não muda depois de definida (é bug ou é feature, é frontend ou é backend), ela vive na label.
 
 ---
 
-## 6. Ecossistema de Repositórios
+## 6. Gestão Ágil e GitHub Projects (Board, Campos Nativos e Automações)
+
+Esta seção não é uma aula de Scrum — é um manual operacional de como usar o **GitHub Projects** (o Kanban da organização) na prática, incluindo como traduzir uma EAP/WBS para o board.
+
+### Criando o Board (Novo Project)
+
+Cada projeto acadêmico deve ter seu próprio Project vinculado ao repositório:
+
+1. No seu repositório, aba `Projects` → `New project`.
+2. Escolha o template **`SenacOS · Board Acadêmico`** (template oficial da organização, com Backlog, Board e Roadmap já configurados) — ou, na falta dele, o template embutido `Board`.
+3. Vincule o Project ao repositório (`Settings do Project → Manage access` ou direto pela criação a partir do repo) para que Issues e PRs apareçam automaticamente como candidatos a entrar no board.
+4. Em `Settings → Default repository`, selecione o repositório do seu projeto acadêmico — isso evita ter que escolher o repo manualmente toda vez que criar um item novo direto pelo board.
+
+### Colunas do Board (Status)
+
+| Coluna | Significado |
+|---|---|
+| **Backlog** *(opcional)* | Ideias e tarefas ainda não priorizadas para o ciclo atual |
+| **Todo** | Já tem critérios de aceitação definidos, pronta para alguém pegar |
+| **In Progress** | Alguém está trabalhando ativamente nisso agora |
+| **In Review** | Pull Request aberto, aguardando revisão |
+| **Done** | Mergeado e fechado |
+
+Status é sempre coluna do board — nunca label (ver Seção 5).
+
+### Campos Nativos: Priority, Size e Iteration (em vez de labels)
+
+Adicione estes campos em `Project → ... → Settings → New field`:
+
+| Campo | Tipo | Opções sugeridas | Substitui |
+|---|---|---|---|
+| `Priority` | Single select | 🔴 Alta / 🟡 Média / 🟢 Baixa | label `prioridade-*` |
+| `Size` | Single select | XS, S, M, L, XL | label `complex` |
+| `Iteration` | Iteration | Duração do seu ciclo (ex.: 1 ou 2 semanas) | label `sprint-01`, `sprint-02`... |
+
+Esses três campos resolvem exatamente o que labels de prioridade/tamanho/sprint tentariam capturar, sem duplicar informação em dois lugares.
+
+### Vinculando Issues e Pull Requests (Workflows/Automações)
+
+O board se move sozinho quando você usa as palavras-chave certas:
+
+- Ao abrir um Pull Request, escreva `Closes #<número-da-issue>` (ou `Fixes #<número>`) na descrição.
+- Quando esse PR for mergeado, a Issue fecha automaticamente — e, se o Workflow abaixo estiver configurado, o card some da coluna `In Progress`/`In Review` e vai direto para `Done`.
+
+**Automações nativas** (`Project → ... → Workflows`):
+
+| Gatilho | Ação |
+|---|---|
+| Item adicionado ao Project | Status = `Todo` |
+| Pull Request aberto referenciando a Issue | Status = `In Review` |
+| Issue/PR fechado | Status = `Done` |
+
+Ativar esses três workflows já cobre o ciclo básico sem precisar mover card manualmente na maior parte do tempo.
+
+### Sub-issues Nativas (Módulo x Tarefa)
+
+O `Template-Projeto-Academico` já vem com dois Issue Templates prontos para isso: `🧩 Módulo/Epic` e `📋 Tarefa`. Para vinculá-los:
+
+1. Abra a Issue de Módulo.
+2. Na sidebar, use `Create sub-issue` (ou adicione uma Tarefa já existente como sub-issue pelo mesmo menu).
+3. O GitHub passa a mostrar uma barra de progresso automática no Módulo, calculada pelas sub-issues fechadas — sem precisar atualizar checklist manualmente.
+
+### Traduzindo a EAP para o Board
+
+Se o seu projeto usa EAP (ver "Nomeando Branches e Issues com Código EAP" na Seção 4), o fluxo fica assim:
+
+1. Cada **módulo da EAP** (ex.: `4.3 Gestão de Agenda`) vira uma Issue usando o template `🧩 Módulo/Epic`, com o código da EAP no título: `[4.3] Gestão de Agenda`.
+2. Cada **tarefa da EAP** (ex.: `4.3.1 Cálculo de horário`) vira uma sub-issue usando o template `📋 Tarefa`, título `[4.3.1] Cálculo de horário`, vinculada ao Módulo `4.3` via `Create sub-issue`.
+3. No board, o card do Módulo mostra visualmente quantas das suas tarefas já foram concluídas — sua EAP inteira, em forma de Kanban, sem duplicar planejamento em dois documentos separados.
+
+### Fluxo Resumido (Dia a Dia)
+
+1. Issue nova entra com a label `refinement` até ter critérios de aceitação claros.
+2. Uma vez pronta, entra em `Todo`, com `Priority` e `Size` preenchidos.
+3. Alguém se atribui → move para `In Progress`.
+4. Abre o Pull Request referenciando a Issue (`Closes #123`) → vira `In Review` automaticamente.
+5. Aprovado e mergeado → Issue fecha → card vai para `Done` sozinho.
+
+---
+
+## 7. Ecossistema de Repositórios (Mapa da Organização)
 
 | Repositório | Propósito | Status |
 |---|---|---|
+| [`.github`](https://github.com/SenacOS/.github) | Templates de issue/PR padrão, código de conduta e perfil público da organização | ✅ Ativo |
 | [`core`](https://github.com/SenacOS/core) | Regras, Rulesets, templates de gestão ágil e este guia | ✅ Ativo |
 | [`Template-Projeto-Academico`](https://github.com/SenacOS/Template-Projeto-Academico) | Repository Template para novos projetos acadêmicos | ✅ Ativo |
 | `[CURSO]-[SEMESTRE]-*` | Projetos de turma e projetos integradores dos alunos | ✅ Ativo |
@@ -267,9 +348,9 @@ Prioridade, tamanho/esforço e sprint **não** são labels — use os campos nat
 
 ---
 
-## 7. Metodologia & Integridade do Ecossistema
+## 8. Metodologia & Integridade do Ecossistema
 
-- **Gestão Ágil Integrada:** templates padronizados conectados ao **GitHub Projects** (Kanban) para organizar entregas acadêmicas.
+- **Gestão Ágil Integrada:** templates padronizados conectados ao **GitHub Projects** (Kanban) para organizar entregas acadêmicas — ver Seção 6.
 - **Governança Automatizada:** branches principais protegidas por **GitHub Rulesets**, garantindo revisão mínima antes de qualquer código chegar à vitrine pública.
 - **Hábitos Profissionais:** commits semânticos, Pull Requests descritivos e rastreamento de issues fazem parte da cultura de desenvolvimento da comunidade.
 
