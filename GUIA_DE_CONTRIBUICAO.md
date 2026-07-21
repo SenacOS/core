@@ -62,14 +62,28 @@ Cada projeto acadêmico deve viver em **seu próprio repositório individual** d
 [CURSO]-[SEMESTRE]-[NomeDoProjeto]
 ```
 
-- **CURSO:** sigla do curso, a mesma usada nos Times (Seção 2) — `ADS`, `CC`, `ENG-SOFTWARE`, `SISTEMAS-INFO`.
-- **SEMESTRE:** número do semestre seguido de `S` — `1S`, `2S`, `3S`, etc.
-- **NomeDoProjeto:** nome do projeto em `CamelCase`, sem espaços ou acentos.
+**CURSO:** sigla oficial do curso. A comunidade abraça todos os cursos de tecnologia, portanto a lista abaixo não é restritiva, mas serve de padrão para mantermos o ecossistema organizado utilizando as abreviações mais comuns do mercado:
+- `ADS` — Análise e Desenvolvimento de Sistemas
+- `CC` — Ciência da Computação
+- `SI` — Sistemas de Informação *(interpretação padrão para graduação)*
+- `ES` — Engenharia de Software
+- `EC` — Engenharia da Computação
+- `RC` — Redes de Computadores
+- `BD` — Banco de Dados
+- `GTI` — Gestão da Tecnologia da Informação
+- `STI` — Sistemas para Internet (ou SPI)
+
+> A sigla do repositório deve ser curta conforme acima, independentemente de o time no GitHub possuir um nome mais extenso ou descritivo, como `@SenacOS/sistemas-info` ou `@SenacOS/eng-software`.
+
+* **SEMESTRE:** número do semestre seguido de `S` — `1S`, `2S`, `3S`, etc.
+* **NomeDoProjeto:** nome do projeto em `CamelCase`, sem espaços ou acentos.
 
 **Exemplos:**
+
 - `ADS-3S-ClinicaNutricao`
 - `CC-1S-RpgTextual`
-- `SISTEMAS-INFO-2S-ControleEstoque`
+- `SI-2S-ControleEstoque`
+- `ES-4S-SistemaDeVendas`
 
 Esse padrão organiza a aba de repositórios em ordem alfabética por curso automaticamente, sem precisar de nenhuma ação manual de organização.
 
