@@ -65,7 +65,7 @@ Cada projeto acadêmico deve viver em **seu próprio repositório individual** d
 **CURSO:** sigla oficial do curso. A comunidade abraça todos os cursos de tecnologia, portanto a lista abaixo não é restritiva, mas serve de padrão para mantermos o ecossistema organizado utilizando as abreviações mais comuns do mercado:
 - `ADS` — Análise e Desenvolvimento de Sistemas
 - `CC` — Ciência da Computação
-- `SI` — Sistemas de Informação *(interpretação padrão para graduação)*
+- `SI` — Sistemas de Informação
 - `ES` — Engenharia de Software
 - `EC` — Engenharia da Computação
 - `RC` — Redes de Computadores
