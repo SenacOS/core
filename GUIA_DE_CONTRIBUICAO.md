@@ -27,11 +27,11 @@ A SenacOS usa **GitHub Teams** — no formato "flat" (sem hierarquia entre times
 
 **Times previstos:**
 
-| Time (sigla) | Curso (nome completo) | Para que serve |
+| Time (abreviado) | Curso (nome completo) | Para que serve |
 |---|---|---|
 | `@SenacOS/professores` | — | Docentes convidados como referência técnica; dúvidas mais avançadas |
-| `@SenacOS/ads` | Análise e Desenvolvimento de Sistemas | Assuntos específicos do curso |
-| `@SenacOS/cc` | Ciência da Computação | Assuntos específicos do curso |
+| `@SenacOS/dev-sistemas` | Análise e Desenvolvimento de Sistemas | Assuntos específicos do curso |
+| `@SenacOS/ciencia-comp` | Ciência da Computação | Assuntos específicos do curso |
 | `@SenacOS/eng-software` | Engenharia de Software | Assuntos específicos do curso |
 | `@SenacOS/sistemas-info` | Sistemas de Informação | Assuntos específicos do curso |
 
