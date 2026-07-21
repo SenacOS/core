@@ -9,15 +9,8 @@ Este é o **Centro de Inteligência e Processos** da organização SenacOS — o
 
 | Documento | O que você encontra |
 |---|---|
-| [`GUIA-DE-CONTRIBUICAO.md`](./GUIA-DE-CONTRIBUICAO.md) | A "Constituição" da SenacOS: modelo de membresia, Times por curso, nomenclatura de projetos, Git Flow, catálogo de labels e ecossistema de repositórios |
-| [`AGILE.md`](./AGILE.md) | Como usar o GitHub Projects (Kanban) na prática — colunas, automações e o vínculo entre Issues e Pull Requests |
-| [`.github/workflows/`](./.github/workflows/) | Biblioteca de workflows de CI/CD — reusable workflows agnósticos (ex.: checagem de Conventional Commits) e exemplos de `.yml` por stack para copiar e adaptar |
-
-## Por onde começo?
-
-- **Vai contribuir pela primeira vez ou precisa classificar uma Issue/PR?** Comece pelo [`GUIA-DE-CONTRIBUICAO.md`](./GUIA-DE-CONTRIBUICAO.md).
-- **Vai organizar as entregas do seu projeto?** Veja o [`AGILE.md`](./AGILE.md).
-- **Vai configurar CI/CD no seu projeto?** Explore [`.github/workflows/`](./.github/workflows/).
+| [`GUIA-DE-CONTRIBUICAO.md`](./GUIA-DE-CONTRIBUICAO.md) | **Comece por aqui.** A "Constituição" da SenacOS: modelo de membresia, Times por curso, nomenclatura de projetos, Git Flow, catálogo de labels, gestão ágil (Kanban) e ecossistema de repositórios. |
+| [`.github/workflows/`](./.github/workflows/) | Biblioteca de workflows de CI/CD — *reusable workflows* agnósticos (ex.: checagem de Conventional Commits) e exemplos de `.yml` por stack para copiar e adaptar no seu projeto. |
 
 ---
 
