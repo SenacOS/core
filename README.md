@@ -1,4 +1,4 @@
-# SenacOS / core
+# SenacOS · core
 
 Este é o **Centro de Inteligência e Processos** da organização SenacOS — o manual de operações que ensina como a comunidade funciona na prática, além das regras automáticas.
 
