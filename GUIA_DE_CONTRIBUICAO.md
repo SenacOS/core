@@ -17,6 +17,8 @@ No GitHub existem dois níveis de relação com a nossa comunidade — entenda a
 
 Sua primeira contribuição não precisa ser um Pull Request de código. Corrigir um erro de digitação na Biblioteca Livre, responder uma dúvida numa Discussion, ou sugerir uma melhoria de documentação também conta. O que importa é contribuir de verdade — não o quão avançado você já é.
 
+Ao se tornar membro, você também é atribuído(a) automaticamente ao **Team correspondente ao seu curso** (ver Seção 2) — isso acontece através do campo `Curso` do formulário de perfil no [`mural-talentos`](https://github.com/SenacOS/mural-talentos), sem necessidade de pedir a nenhum moderador.
+
 > ⚠️ **Atenção ao aceitar o convite de membro:** por padrão, o GitHub deixa sua filiação à organização como **Privada**. Para o broche aparecer no seu perfil, acesse a página da org → `People` → seu perfil → mude a visibilidade para **Public**.
 
 ---
@@ -48,7 +50,7 @@ Em qualquer Issue, Discussion ou Pull Request, mencione o time com `@SenacOS/nom
 
 Embora os times internos usem siglas, os repositórios acadêmicos recebem **Topics/Tags com o nome do curso por extenso** (ex.: `ciencia-da-computacao`, `analise-e-desenvolvimento-de-sistemas`) — assim, recrutadores e visitantes externos que não conhecem as abreviações da SenacOS ainda conseguem filtrar e encontrar projetos pelo nome completo do curso.
 
-> 🚧 **Planejado:** um formulário de onboarding para novos membros, com checkbox de seleção do curso (por extenso), que os direciona automaticamente ao time correspondente na aceitação do convite.
+> ✅ **Como a atribuição de time acontece na prática:** ela não depende de um moderador nem de um formulário de onboarding separado — acontece automaticamente durante o processo de se tornar membro, através do próprio formulário de perfil no [`mural-talentos`](https://github.com/SenacOS/mural-talentos). Ao criar sua Issue de perfil de candidato e selecionar seu curso no campo `Curso`, você já é adicionado(a) automaticamente ao Team correspondente da organização — sem precisar de nenhuma ação manual adicional.
 
 ---
 
@@ -354,11 +356,14 @@ Se o seu projeto usa EAP (ver "Nomeando Branches e Issues com Código EAP" na Se
 | [`Template-Projeto-Academico`](https://github.com/SenacOS/Template-Projeto-Academico) | Repository Template para novos projetos acadêmicos | ✅ Ativo |
 | `[CURSO]-[SEMESTRE]-*` | Projetos de turma e projetos integradores dos alunos | ✅ Ativo |
 | `comunidade` (GitHub Discussions) | Fórum da comunidade — dúvidas, avisos, bate-papo, sem poluir Issues de projetos sérios | 🚧 Em construção |
-| `me-contrata` | Vitrine de portfólios e busca por oportunidades | 🚧 Em construção |
+| [`mural-talentos`](https://github.com/SenacOS/mural-talentos) | Perfis de candidatos — alunos se auto-declaram via Issue Form e são indexados automaticamente por linguagem de programação, com atribuição automática de Team pelo curso | ✅ Ativo |
+| `mural-vagas` | Vagas publicadas por empresas — par complementar do `mural-talentos`, ainda não implementado | ⬜ Planejado |
 | `biblioteca-livre` | Curadoria de livros, cursos e documentações gratuitas de programação e T.I | 🚧 Em construção |
 | `desafios-codigo` | Laboratório de lógica, estruturas de dados, algoritmos e projetos lúdicos | 🚧 Em construção |
 
-> 🔒 **Nota de privacidade:** ao postar no `me-contrata`, evite expor dados sensíveis (CPF, endereço completo, telefone pessoal) — é um repositório público e indexável.
+> 🧭 **Orientação dentro do `mural-talentos`:** o repositório traz duas Issues fixadas para facilitar a navegação — **`[SenacOS] · Acesso Rápido`** (atalhos diretos para as issues agregadoras de cada linguagem) e **`[SenacOS] · Como navegar pelo Mural`** (guia explicando a dinâmica de perfis, issues agregadoras e busca). Comece por elas antes de procurar candidatos manualmente pela lista de issues.
+
+> 🔒 **Nota de privacidade:** ao postar no `mural-talentos`, evite expor dados sensíveis (CPF, endereço completo, telefone pessoal) — é um repositório público e indexável.
 
 ---
 
