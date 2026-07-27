@@ -355,7 +355,7 @@ Se o seu projeto usa EAP (ver "Nomeando Branches e Issues com Código EAP" na Se
 | [`core`](https://github.com/SenacOS/core) | Regras, Rulesets, templates de gestão ágil e este guia | ✅ Ativo |
 | [`Template-Projeto-Academico`](https://github.com/SenacOS/Template-Projeto-Academico) | Repository Template para novos projetos acadêmicos | ✅ Ativo |
 | `[CURSO]-[SEMESTRE]-*` | Projetos de turma e projetos integradores dos alunos | ✅ Ativo |
-| `comunidade` (GitHub Discussions) | Fórum da comunidade — dúvidas, avisos, bate-papo, sem poluir Issues de projetos sérios | 🚧 Em construção |
+| `comunidade` (GitHub Discussions) | Fórum da comunidade — dúvidas, avisos, bate-papo, sem poluir Issues de projetos sérios | ✅ Ativo |
 | [`mural-talentos`](https://github.com/SenacOS/mural-talentos) | Perfis de candidatos — alunos se auto-declaram via Issue Form e são indexados automaticamente por linguagem de programação, com atribuição automática de Team pelo curso | ✅ Ativo |
 | `mural-vagas` | Vagas publicadas por empresas — par complementar do `mural-talentos`, ainda não implementado | ⬜ Planejado |
 | `biblioteca-livre` | Curadoria de livros, cursos e documentações gratuitas de programação e T.I | 🚧 Em construção |
