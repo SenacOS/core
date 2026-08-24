@@ -9,7 +9,7 @@ Este é o **Centro de Inteligência e Processos** da organização SenacOS — o
 
 | Documento | O que você encontra |
 |---|---|
-| [`GUIA-DE-CONTRIBUICAO.md`](./GUIA-DE-CONTRIBUICAO.md) | **Comece por aqui.** A "Constituição" da SenacOS: modelo de membresia, Times por curso, nomenclatura de projetos, Git Flow, catálogo de labels, gestão ágil (Kanban) e ecossistema de repositórios. |
+| [`GUIA-DE-CONTRIBUICAO.md`](./GUIA_DE_CONTRIBUICAO.md) | **Comece por aqui.** A "Constituição" da SenacOS: modelo de membresia, Times por curso, nomenclatura de projetos, Git Flow, catálogo de labels, gestão ágil (Kanban) e ecossistema de repositórios. |
 | [`.github/workflows/`](./.github/workflows/) | Biblioteca de workflows de CI/CD — *reusable workflows* agnósticos (ex.: checagem de Conventional Commits) e exemplos de `.yml` por stack para copiar e adaptar no seu projeto. |
 
 ---
