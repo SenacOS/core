@@ -276,7 +276,7 @@ GitHub Discussions também suporta labels — mas elas **não substituem a Categ
 | `sem-resposta` | Uma Dúvida ainda está em aberto, aguardando alguém ajudar |
 | `precisa-de-professor` | A Dúvida travou num ponto técnico mais avançado e precisa de alguém de `@SenacOS/professores` |
 
-> ⚠️ Não crie labels que dupliquem a Categoria em si (ex.: `alerta-critico` ao lado do prefixo `[Alerta]` da Seção 8) — isso é a mesma informação em três lugares (dropdown, título, label). Labels de Discussion existem só para o que a Categoria e o título **não** conseguem expressar sozinhos.
+> ⚠️ Não crie labels que dupliquem a Categoria em si (ex.: `alerta-critico` ao lado do prefixo `[ALERTA]` da Seção 8) — isso é a mesma informação em três lugares (dropdown, título, label). Labels de Discussion existem só para o que a Categoria e o título **não** conseguem expressar sozinhos.
 
 ---
 
@@ -417,18 +417,20 @@ O formulário de **Aviso** em `comunidade` já tem uma categoria obrigatória (`
 
 | Categoria do formulário | Prefixo no título |
 |---|---|
-| Comunicado Institucional | `[Institucional]` |
-| Atualização da Organização | `[Organização]` |
-| Eventos/Palestras | `[Evento]` |
-| Alerta Crítico | `[Alerta]` |
+| Comunicado Institucional | `[INST]` |
+| Atualização da Organização | `[ORG]` |
+| Eventos/Palestras | `[EVENTO]` |
+| Alerta Crítico | `[ALERTA]` |
 
 **Exemplos:**
 ```
-[Institucional] Novo calendário de matrículas do semestre
-[Organização] Board Acadêmico ganha template oficial
-[Evento] Palestra sobre Rust na prática — 20/09
-[Alerta] Manutenção programada vai derrubar o mural-talentos por 2h
+[INST] Novo calendário de matrículas do semestre
+[ORG] Board Acadêmico ganha template oficial
+[EVENTO] Palestra sobre Rust na prática — 20/09
+[ALERTA] Manutenção programada vai derrubar o mural-talentos por 2h
 ```
+
+> **Sobre o prefixo `[INST]`:** é uma abreviação direta de "Institucional", no mesmo espírito das siglas de curso já usadas no guia (`ADS`, `CC`, `SI`...). Evitamos abreviações como `[SENAC]`, `[Comunicado]` ou `[Info]` porque dão a entender que o aviso é emitido *pela* instituição/organização, quando na verdade o aviso é *sobre* algo institucional — a sigla `[INST]` preserva essa distinção sem soar como declaração oficial de autoria.
 
 **Por que categoria em vez de data:**
 
