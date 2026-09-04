@@ -265,6 +265,19 @@ Prioridade, tamanho/esforço e sprint **não** são labels — use os campos nat
 
 **Regra prática:** se a informação muda com frequência ao longo do trabalho (status, prioridade, sprint), ela vive no board. Se é uma característica que praticamente não muda depois de definida (é bug ou é feature, é frontend ou é backend), ela vive na label.
 
+### Labels em Discussions (não confundir com Categoria)
+
+GitHub Discussions também suporta labels — mas elas **não substituem a Categoria** do formulário (`Aviso`, `Dúvidas`, `Ideias`, etc.), que já identifica o *tipo* da conversa (ver Seção 8 para o caso de Avisos). Labels em Discussions servem para um eixo **cruzado**, que a Categoria não cobre:
+
+| Label | Quando usar |
+|---|---|
+| `ads`, `cc`, `si`, `es`, `ec`, `rc`, `bd`, `gti`, `sti` | Discussion relevante para um curso específico — mesma sigla da Seção 3, para filtrar por assunto independentemente da Categoria |
+| `respondida` | Uma Dúvida já recebeu uma resposta considerada satisfatória |
+| `sem-resposta` | Uma Dúvida ainda está em aberto, aguardando alguém ajudar |
+| `precisa-de-professor` | A Dúvida travou num ponto técnico mais avançado e precisa de alguém de `@SenacOS/professores` |
+
+> ⚠️ Não crie labels que dupliquem a Categoria em si (ex.: `alerta-critico` ao lado do prefixo `[Alerta]` da Seção 8) — isso é a mesma informação em três lugares (dropdown, título, label). Labels de Discussion existem só para o que a Categoria e o título **não** conseguem expressar sozinhos.
+
 ---
 
 ## 6. Gestão Ágil e GitHub Projects (Board, Campos Nativos e Automações)
@@ -347,7 +360,87 @@ Se o seu projeto usa EAP (ver "Nomeando Branches e Issues com Código EAP" na Se
 
 ---
 
-## 7. Ecossistema de Repositórios (Mapa da Organização)
+## 7. Simulados — Convenção de Nomenclatura e Padrão Visual
+
+A partir de agora, os simulados passam a seguir um **padrão único de nomenclatura**, substituindo o formato anterior baseado na convenção de projetos acadêmicos.
+
+**Formato novo:**
+
+```
+materia-simulado-tema
+```
+
+**Exemplos:**
+- `ads-simulado-heranca`
+- `bd-simulado-normalizacao`
+- `cc-simulado-recursao`
+
+> **Padrão anterior (descontinuado):** `curso-semestre-TesteMateria`, ex.: `ADS-3S-TestePOO` — mesma lógica da Seção 3 (projetos acadêmicos), só que aplicada a simulados. Simulados existentes não precisam ser renomeados retroativamente; o novo padrão vale a partir de agora.
+
+**Por que essa mudança:**
+
+- **Busca mais rápida:** com um padrão fixo, fica muito mais fácil localizar simulados por matéria ou tema, seja pela busca nativa do GitHub ou navegando manualmente pela lista.
+- **Identidade visual consistente:** todos os simulados passam a usar o mesmo template visual **"Blueprint"**, variando apenas a cor de destaque para identificação imediata entre eles.
+
+### Template Visual "Blueprint" — Requisitos
+
+Todo simulado novo deve seguir a estrutura visual abaixo:
+
+| Elemento | Requisito |
+|---|---|
+| **Header** | Nome da matéria/tema e curso, barra de navegação, alternância entre modo claro/escuro |
+| **Footer** | Onde o simulado se encaixa e o escopo do conteúdo resumido |
+| **Cards** | Organização visual padronizada entre todos os simulados |
+| **Cores** | Uma cor de destaque por simulado, evitando repetição entre temas próximos |
+| **Responsividade** | Layout adaptado para uso em dispositivos móveis, garantindo boa leitura e navegação em telas menores |
+| **Exercícios** | Mínimo de 20 exercícios por simulado |
+| **Fontes** | Referência das fontes dos exercícios/conteúdo, quando aplicável |
+
+**O que muda na prática:**
+
+- Novos simulados já devem seguir o padrão de nomenclatura e o template "Blueprint" descritos acima.
+- Nenhum simulado pode divulgar material sensível/confidencial pertencente à instituição.
+
+> Dúvidas sobre o novo padrão? Comente na publicação de anúncio em `comunidade`.
+
+---
+
+## 8. Avisos — Convenção de Título nas Discussions
+
+O formulário de **Aviso** em `comunidade` já tem uma categoria obrigatória (`Comunicado Institucional`, `Atualização da Organização`, `Eventos/Palestras`, `Alerta Crítico`). A partir de agora, todo Aviso deve prefixar o título com essa categoria — **não com a data**.
+
+**Formato:**
+
+```
+[Categoria] Título
+```
+
+| Categoria do formulário | Prefixo no título |
+|---|---|
+| Comunicado Institucional | `[Institucional]` |
+| Atualização da Organização | `[Organização]` |
+| Eventos/Palestras | `[Evento]` |
+| Alerta Crítico | `[Alerta]` |
+
+**Exemplos:**
+```
+[Institucional] Novo calendário de matrículas do semestre
+[Organização] Board Acadêmico ganha template oficial
+[Evento] Palestra sobre Rust na prática — 20/09
+[Alerta] Manutenção programada vai derrubar o mural-talentos por 2h
+```
+
+**Por que categoria em vez de data:**
+
+- **A data já é nativa:** toda Discussion exibe a data de publicação automaticamente ao lado do autor, e a listagem da categoria pode ser ordenada por "Newest" sem esforço — duplicar isso manualmente no título só carrega desvantagem (formatos inconsistentes entre autores, como `[04/09]` vs `[2026-09-04]` vs `[04/set]`; e a data do título não se atualiza sozinha se o post for editado depois, ao contrário da data nativa do GitHub).
+- **Categoria não fica desatualizada:** ao contrário de "há quanto tempo isso foi postado", a categoria de um aviso não muda com o tempo — então o prefixo continua correto para sempre, sem manutenção.
+- **Mesma lógica já aplicada em outro lugar do guia:** é o mesmo raciocínio da Seção 5 (Prioridade/Status/Sprint não são labels porque o GitHub já tem campo nativo para isso) — aqui, a categoria do formulário de Aviso já existe nativamente; o título só precisa refletir essa informação, sem reinventá-la.
+
+> O campo de categoria do formulário continua sendo a fonte oficial (é ele que alimenta o filtro de categoria da Discussion); o prefixo no título é só um atalho de leitura rápida para quem está escaneando a lista.
+
+---
+
+## 9. Ecossistema de Repositórios (Mapa da Organização)
 
 | Repositório | Propósito | Status |
 |---|---|---|
@@ -367,7 +460,7 @@ Se o seu projeto usa EAP (ver "Nomeando Branches e Issues com Código EAP" na Se
 
 ---
 
-## 8. Metodologia & Integridade do Ecossistema
+## 10. Metodologia & Integridade do Ecossistema
 
 - **Gestão Ágil Integrada:** templates padronizados conectados ao **GitHub Projects** (Kanban) para organizar entregas acadêmicas — ver Seção 6.
 - **Governança Automatizada:** branches principais protegidas por **GitHub Rulesets**, garantindo revisão mínima antes de qualquer código chegar à vitrine pública.
