@@ -1,0 +1,83 @@
+name: PR Labeler (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      paths-config:
+        description: "Caminho do arquivo de config do actions/labeler no repo consumidor"
+        type: string
+        default: ".github/labeler.yml"
+        required: false
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  path-labels:
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v5
+        with:
+          configuration-path: ${{ inputs.paths-config }}
+          sync-labels: true
+
+  type-labels:
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extrair labels do checklist "Tipo de Mudança"
+        uses: actions/github-script@v7
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        with:
+          script: |
+            const body = process.env.PR_BODY || "";
+
+            // Mapa: texto EXATO da opção no PULL_REQUEST_TEMPLATE.md -> label do catálogo (Seção 5 do Guia)
+            const CHECKLIST_TO_LABEL = {
+              "Bugfix (correção de um erro)": "bug",
+              "Feature (nova funcionalidade)": "enhancement",
+              "Refatoração (melhoria na arquitetura ou código limpo, sem mudar o comportamento)": "refactor",
+              "Core/Configuração (ajustes em CI/CD, dependências, banco de dados)": "core",
+              "Documentação (README, guias, correções de texto)": "documentation",
+            };
+
+            // Extrai só o bloco "## // Tipo de Mudança" do body, para não casar
+            // texto igual escrito em outra seção do PR (ex.: descrição livre).
+            function extractSection(markdown, heading) {
+              const lines = markdown.split(/\r?\n/);
+              const startIdx = lines.findIndex(l => l.trim().startsWith(heading));
+              if (startIdx === -1) return null;
+
+              const rest = lines.slice(startIdx + 1);
+              const endIdx = rest.findIndex(l => /^\s*#{1,6}\s/.test(l));
+              const sectionLines = endIdx === -1 ? rest : rest.slice(0, endIdx);
+              return sectionLines.join("\n");
+            }
+
+            const section = extractSection(body, "## // Tipo de Mudança") ?? body;
+
+            const labelsToAdd = [];
+            for (const [optionText, label] of Object.entries(CHECKLIST_TO_LABEL)) {
+              const escaped = optionText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+              // Casa "- [x]" ou "- [X]" imediatamente antes do texto exato da opção,
+              // no início de linha (após espaços), evitando falso-positivo em texto solto.
+              const re = new RegExp(`^\\s*-\\s*\\[[xX]\\]\\s*${escaped}\\s*$`, "m");
+              if (re.test(section)) labelsToAdd.push(label);
+            }
+
+            if (labelsToAdd.length === 0) {
+              core.info("Nenhuma opção marcada no checklist de Tipo de Mudança.");
+              return;
+            }
+
+            core.info(`Labels a aplicar: ${labelsToAdd.join(", ")}`);
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              labels: labelsToAdd,
+            });
