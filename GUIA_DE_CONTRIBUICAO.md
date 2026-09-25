@@ -113,7 +113,7 @@ O objetivo do padrão é manter os simulados consistentes entre si, facilitar a 
 **Formato:**
 
 ```text
-materia-simulado-tema
+curso-simulado-tema
 ````
 
 **Exemplos:**
