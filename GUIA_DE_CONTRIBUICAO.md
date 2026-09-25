@@ -102,41 +102,128 @@ Isso permite filtrar a lista de repositórios da organização por tag, algo que
 
 **Autonomia de criação:** membros têm liberdade total para criar repositórios de projetos acadêmicos a qualquer momento, sem necessidade de aprovação prévia de um moderador — dado o peso avaliativo desses projetos, exigir espera por autorização seria contraproducente para o cronograma acadêmico dos alunos.
 
-### Simulados — Convenção de Nomenclatura e Padrão Visual
+### Simulados — Convenção de Nomenclatura, Padrão Visual e Arquitetura
 
-A partir de agora, os simulados passam a seguir um **padrão único de nomenclatura**, substituindo o formato anterior baseado na convenção de projetos acadêmicos descrita acima.
+A partir de agora, os simulados passam a seguir um **padrão único de nomenclatura, identidade visual e arquitetura**, substituindo o formato anterior baseado na convenção de projetos acadêmicos descrita acima.
 
-**Formato novo:**
+O objetivo do padrão é manter os simulados consistentes entre si, facilitar a manutenção e permitir que a mesma base estrutural seja reutilizada em diferentes disciplinas, sem sacrificar a experiência do usuário.
 
-```
+#### Convenção de nomenclatura
+
+**Formato:**
+
+```text
 materia-simulado-tema
-```
+````
 
 **Exemplos:**
-- `ads-simulado-heranca`
-- `bd-simulado-normalizacao`
-- `cc-simulado-recursao`
 
-**Template Visual "Blueprint" — Requisitos**
+* `ads-simulado-heranca`
+* `bd-simulado-normalizacao`
+* `cc-simulado-recursao`
 
-Todo simulado novo deve seguir a estrutura visual abaixo:
+A nomenclatura deve ser curta, descritiva, em minúsculas e separada por hífens.
 
-| Elemento | Requisito |
-|---|---|
-| **Header** | Nome da matéria/tema e curso, barra de navegação, alternância entre modo claro/escuro |
-| **Footer** | Onde o simulado se encaixa e o escopo do conteúdo resumido |
-| **Cards** | Organização visual padronizada entre todos os simulados |
-| **Cores** | Uma cor de destaque por simulado, evitando repetição entre temas próximos |
-| **Responsividade** | Layout adaptado para uso em dispositivos móveis, garantindo boa leitura e navegação em telas menores |
-| **Exercícios** | Mínimo de 20 exercícios por simulado |
-| **Fontes** | Referência das fontes dos exercícios/conteúdo, quando aplicável |
+---
 
-**O que muda na prática:**
+#### Template Visual "Blueprint"
 
-- Novos simulados já devem seguir o padrão de nomenclatura e o template "Blueprint" descritos acima.
-- Nenhum simulado pode divulgar material sensível/confidencial pertencente à instituição.
+Todo novo simulado deve seguir o **Blueprint**, preservando uma identidade visual e uma experiência de uso coerentes entre os projetos.
 
-> Dúvidas sobre o novo padrão? Comente na publicação de anúncio em `comunidade`.
+| Elemento           | Requisito                                                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| **Header**         | Nome da matéria/tema e curso, navegação e alternância entre modo claro/escuro                                          |
+| **Hero**           | Apresentação objetiva do propósito e escopo do simulado                                                                |
+| **Sumário**        | Acesso rápido aos conteúdos disponíveis                                                                                |
+| **Cards**          | Organização visual padronizada entre os simulados                                                                      |
+| **Cores**          | Uma cor de destaque por simulado, evitando repetição desnecessária entre temas próximos                                |
+| **Responsividade** | Layout adaptado para dispositivos móveis, com boa leitura e navegação em telas menores                                 |
+| **Exercícios**     | Mínimo de 20 questões por simulado                                                                                     |
+| **Feedback**       | Correção e justificativa das questões objetivas; questões dissertativas devem apresentar gabarito ou resposta esperada |
+| **Fontes**         | Referências utilizadas na elaboração do conteúdo e das questões, quando aplicável                                      |
+| **Footer**         | Contextualização do simulado dentro da disciplina e indicação do escopo do conteúdo                                    |
+
+---
+
+#### Arquitetura "Blueprint"
+
+A arquitetura padrão deve priorizar **manutenabilidade, reutilização, separação de responsabilidades e facilidade de evolução**.
+
+A estrutura de referência é:
+
+```text
+├── index.html                  # casca da página
+│
+├── css/
+│   └── style.css               # design system e apresentação
+│
+├── js/
+│   ├── app.js                  # composição da página e carregamento dos conteúdos
+│   ├── quiz.js                 # motor genérico dos simulados
+│   ├── nav.js                  # navegação responsiva
+│   └── theme.js                # tema claro/escuro
+│
+└── content/
+    ├── chapters.json           # catálogo e ordem dos conteúdos
+    ├── theory/                 # teoria, um arquivo por conteúdo
+    └── questions/              # questões, um arquivo por conteúdo
+```
+
+**Princípio central:**
+
+> A arquitetura deve ser padronizada; o conteúdo deve ser variável.
+
+Isso significa que o mesmo `quiz.js`, `style.css` e modelo de aplicação devem poder ser reutilizados em diferentes simulados, enquanto teoria, capítulos e questões permanecem isolados em `content/`.
+
+**Responsabilidades:**
+
+* `index.html`: fornece a estrutura base da página, sem concentrar conteúdo específico.
+* `style.css`: centraliza o design system, incluindo cores, tipografia, espaçamento, componentes, responsividade e estados visuais.
+* `app.js`: monta a interface e carrega capítulos, teoria e simulados a partir dos arquivos de conteúdo.
+* `quiz.js`: funciona como motor genérico do simulado, responsável por renderização, embaralhamento, correção, progresso e feedback.
+* `nav.js`: concentra o comportamento da navegação responsiva.
+* `theme.js`: controla a alternância entre os temas claro e escuro.
+* `chapters.json`: define os conteúdos, sua identificação, ordem e metadados de navegação.
+* `theory/`: contém o material teórico organizado por assunto.
+* `questions/`: contém o banco de questões organizado por assunto.
+
+O conteúdo não deve ser acoplado desnecessariamente à lógica da aplicação. Alterações em teoria ou questões devem, sempre que possível, ser realizadas em `content/`, sem modificar o motor do simulado.
+
+A arquitetura deve permanecer proporcional ao projeto: não adicionar camadas, abstrações ou dependências apenas por formalidade. O objetivo é obter **manutenção simples, reutilização real e clareza**, e não complexidade arquitetural.
+
+---
+
+#### Princípios de implementação
+
+Ao criar ou atualizar um simulado:
+
+1. **Priorizar o usuário:** clareza, legibilidade, navegação intuitiva e boa experiência em diferentes dispositivos vêm antes de decisões puramente técnicas.
+2. **Preservar o Blueprint:** novos simulados devem parecer parte da mesma coleção, mesmo quando abordarem disciplinas diferentes.
+3. **Separar conteúdo de comportamento:** questões e teoria não devem ficar acopladas ao código do motor.
+4. **Reutilizar antes de duplicar:** funcionalidades comuns devem permanecer na estrutura compartilhada sempre que possível.
+5. **Manter a arquitetura simples:** adicionar complexidade somente quando houver necessidade concreta.
+6. **Projetar para manutenção:** novos conteúdos devem poder ser adicionados sem reescrever a aplicação.
+7. **Manter acessibilidade e responsividade:** a experiência não deve depender exclusivamente de telas grandes ou de um único modo de interação.
+8. **Evitar dependências desnecessárias:** quando HTML, CSS e JavaScript nativos forem suficientes, não introduzir frameworks apenas por conveniência.
+9. **Preservar a autonomia do conteúdo:** cada disciplina pode ter sua própria organização pedagógica sem alterar o contrato estrutural do Blueprint.
+10. **Não expor material sensível:** nenhum simulado pode divulgar material sensível ou confidencial pertencente à instituição.
+
+---
+
+#### O que muda na prática
+
+* Novos simulados devem seguir a nomenclatura `curso-simulado-tema`.
+* Todo novo simulado deve utilizar o Blueprint visual e arquitetural.
+* A identidade visual deve ser consistente com os demais simulados, permitindo apenas variações controladas, como a cor de destaque.
+* O conteúdo específico deve permanecer em `content/`.
+* A lógica genérica do simulado deve ser reutilizada sempre que possível.
+* Alterações no conteúdo não devem exigir alterações no motor do quiz quando não houver necessidade funcional.
+* Simulados menores podem omitir elementos que não façam sentido para seu conteúdo, mas não devem criar uma arquitetura paralela sem justificativa.
+* Nenhum simulado pode divulgar material sensível ou confidencial pertencente à instituição.
+
+> **Contexto para novas implementações:** quando este guia for utilizado como contexto em uma nova conversa com uma IA, trate o Blueprint como a referência arquitetural e visual padrão dos simulados. Priorize a experiência do usuário, preserve a separação entre conteúdo e aplicação e evite introduzir complexidade que não gere benefício concreto. Caso exista conflito entre uma preferência estética pontual e os princípios de usabilidade, acessibilidade, manutenção ou clareza, priorize esses princípios e explique brevemente a decisão.
+
+> Dúvidas sobre o novo padrão? Comente na publicação de anúncio em [`comunidade`](https://github.com/orgs/SenacOS/discussions/1).
 
 ---
 
